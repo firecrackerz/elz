@@ -1,7 +1,6 @@
 package builder
 
 import (
-	"github.com/elz-lang/elz/src/elz/ast"
 	"github.com/elz-lang/elz/src/elz/codegen"
 	"github.com/elz-lang/elz/src/elz/parser"
 
@@ -10,9 +9,7 @@ import (
 
 type Builder struct {
 	*ExprBuilder
-
-	bindingType  map[string][]ast.Type
-	bindTypeList []ast.Type
+	*BindingBuilder
 
 	astTree *codegen.Tree
 }
@@ -26,10 +23,9 @@ func (b *Builder) ExitProgram(c *parser.ProgramContext) {
 
 func New() *Builder {
 	return &Builder{
-		ExprBuilder:  NewExprBuilder(),
-		bindingType:  make(map[string][]ast.Type),
-		bindTypeList: make([]ast.Type, 0),
-		astTree:      codegen.NewTree(),
+		ExprBuilder:    NewExprBuilder(),
+		BindingBuilder: NewBindingBuilder(),
+		astTree:        codegen.NewTree(),
 	}
 }
 
