@@ -37,7 +37,7 @@ func (b *Builder) ExitCombineType(c *parser.CombineTypeContext) {
 }
 
 func (b *Builder) ExitBinding(c *parser.BindingContext) {
-	bindingTo := b.PopExpr().(ast.Expr)
+	bindingTo := b.ExprBuilder.Build()
 	paramList := make([]string, 0)
 	for _, paramName := range c.AllIDENT() {
 		paramList = append(paramList, paramName.GetText())
